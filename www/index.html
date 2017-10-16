@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #MyViewerDiv {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background-color: #F0F8FF;
+        }
+    </style>
+
+    <title>Eden Viewer</title>
+
+    <link rel="stylesheet" href="https://developer.api.autodesk.com/derivativeservice/v2/viewers/style.min.css?v=2.14" type="text/css">
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <script src="https://developer.api.autodesk.com/derivativeservice/v2/viewers/three.min.js?v=2.14"></script>
+    <script src="https://developer.api.autodesk.com/derivativeservice/v2/viewers/viewer3D.min.js?v=2.14"></script>
+    <script src="/extensions/Autodesk.ADN.Viewing.Extension.Color.js"></script>
+    <script src="/js/index.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
+</head>
+
+<body>
+
+    <script>    
+
+        jQuery(window).load(function () {
+            setTimeout(function () {
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url: "/get-Status1",
+                    method: "GET",
+                }).done(function (response) {
+                    // console.log(response);
+                    var orange = new THREE.Vector4(1, 0.6, 0, 0.4);
+                    viewer.setColor(response, orange);
+                });
+
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url: "/get-Status2",
+                    method: "GET",
+                }).done(function (response) {
+                    // console.log(response);
+                    var pupple = new THREE.Vector4(1, 0, 1, 0.4);
+                    viewer.setColor(response, pupple);
+                });
+
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url: "/get-Status3",
+                    method: "GET",
+                }).done(function (response) {
+                    // console.log(response);
+                    var green = new THREE.Vector4(0.3, 0.7, 0, 0.4);
+                    viewer.setColor(response, green);
+                });
+
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url: "/get-Status4",
+                    method: "GET",
+                }).done(function (response) {
+                    // console.log(response);
+                    var blue = new THREE.Vector4(0, 0, 1, 0.4);
+                    viewer.setColor(response, blue);
+                });
+
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url: "/get-Status5",
+                    method: "GET",
+                }).done(function (response) {
+                    // console.log(response);
+                    var Lightseagreen = new THREE.Vector4(0.125, 0.68, 0.667, 0.4);
+                    viewer.setColor(response, Lightseagreen);
+                });
+
+            }, 7000);
+        });
+
+    </script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        socket.on('connect', function () {
+            console.log('connect');
+        });
+
+        socket.on('status1', function (STATUS1) {
+            var orange = new THREE.Vector4(1, 0.6, 0, 0.4);
+            viewer.setColor(STATUS1, orange);
+            // console.log(STATUS1);
+        });
+
+        socket.on('status2', function (STATUS2) {
+            var pupple = new THREE.Vector4(1, 0, 1, 0.4);
+            viewer.setColor(STATUS2, pupple);
+            // console.log(STATUS2);
+        });
+
+        socket.on('status3', function (STATUS3) {
+            var green = new THREE.Vector4(0.3, 0.7, 0, 0.4);
+            viewer.setColor(STATUS3, green);
+            // console.log(STATUS3);
+        });
+
+        socket.on('status4', function (STATUS4) {
+            var blue = new THREE.Vector4(0, 0, 1, 0.4);
+            viewer.setColor(STATUS4, blue);
+            // console.log(STATUS4);
+        });
+
+        socket.on('status5', function (STATUS5) {
+            var Lightseagreen = new THREE.Vector4(0.125, 0.68, 0.667, 0.4);
+            viewer.setColor(STATUS5, Lightseagreen);
+            // console.log(STATUS5);
+        });
+
+    </script>
+
+    <div class="container">
+        <div class="center-block" id="viewerDiv"></div>
+    </div>
+
+</body>
+
+</html>
